@@ -2,12 +2,65 @@
 
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
+import TaskItem from '@tiptap/extension-task-item'
+import TaskList from '@tiptap/extension-task-list'
+import Document from '@tiptap/extension-document'
+import Gapcursor from '@tiptap/extension-gapcursor'
+import Paragraph from '@tiptap/extension-paragraph'
+import Table from '@tiptap/extension-table'
+import TableCell from '@tiptap/extension-table-cell'
+import TableHeader from '@tiptap/extension-table-header'
+import TableRow from '@tiptap/extension-table-row'
+import Text from '@tiptap/extension-text'
+import Image from '@tiptap/extension-image'
+import ImageResize from 'tiptap-extension-resize-image'
 
 const Editor = () => {
 
     const editor = useEditor({
-        extensions: [StarterKit],
-        content: '<p>Hello World! 🌎️</p>',
+        editorProps: {
+            attributes: { 
+                style: "padding-right: 56px; padding-left: 56px",
+                class: "w-[816px] focus:outline-none bg-white border print:border-0 border-[#C7C7C7]  flex flex-col min-h-[1054px] pt-10 pb-10 pr-14 cursor-text",
+            }
+
+        },
+        extensions: [
+            StarterKit,
+            Image,
+            ImageResize,
+            Document,
+            Paragraph,
+            Text,
+            Gapcursor,
+            Table.configure({
+              resizable: true,
+            }),
+            TableRow,
+            TableHeader,
+            TableCell,
+            TaskItem.configure({
+                nested: true
+            }),
+            TaskList
+            
+        ],
+        content:  `
+        <table>
+          <tbody>
+            <tr>
+              <th>Name</th>
+              <th colspan="3">Description</th>
+            </tr>
+            <tr>
+              <td>Cyndi Lauper</td>
+              <td>Singer</td>
+              <td>Songwriter</td>
+              <td>Actress</td>
+            </tr>
+          </tbody>
+        </table>
+      `,
     })
 
     return (
