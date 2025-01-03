@@ -1,18 +1,21 @@
 import React from 'react'
 import Editor from './editor';
+import Toolbar from './toolbar.tsx';
 
-interface DocumentIdPageProps{
-  params: Promise< {documentId: string}>;
-  
+interface DocumentIdPageProps {
+  params: Promise<{ documentId: string }>;
+
 }
 
-const DocumentIdPage = async ( { params }: DocumentIdPageProps ) => {
+const DocumentIdPage = async ({ params }: DocumentIdPageProps) => {
 
-    const { documentId } = await params
+  const { documentId } = await params
+  console.log(documentId)
 
   return (
     <div className='min-h-screen bg-slate-100'>
-       <Editor />
+      <Toolbar />
+      <Editor />
     </div>
   )
 }

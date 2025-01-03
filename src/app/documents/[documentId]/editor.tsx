@@ -14,10 +14,16 @@ import TableRow from '@tiptap/extension-table-row'
 import Text from '@tiptap/extension-text'
 import Image from '@tiptap/extension-image'
 import ImageResize from 'tiptap-extension-resize-image'
+import { useEditorStore } from '@/store/use-editor-store'
 
 const Editor = () => {
 
+   const { setEditor } = useEditorStore()
+
     const editor = useEditor({
+      onCreate({editor}) {
+        setEditor(editor)
+      },
         editorProps: {
             attributes: { 
                 style: "padding-right: 56px; padding-left: 56px",
