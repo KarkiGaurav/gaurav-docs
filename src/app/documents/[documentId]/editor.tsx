@@ -14,6 +14,7 @@ import TableRow from '@tiptap/extension-table-row'
 import Text from '@tiptap/extension-text'
 import Image from '@tiptap/extension-image'
 import ImageResize from 'tiptap-extension-resize-image'
+import Underline from '@tiptap/extension-underline'
 import { useEditorStore } from '@/store/use-editor-store'
 
 const Editor = () => {
@@ -22,7 +23,28 @@ const Editor = () => {
 
     const editor = useEditor({
       onCreate({editor}) {
-        setEditor(editor)
+        setEditor(editor);
+      },
+      onDestroy() {
+        setEditor(null);
+      },
+      onUpdate({editor}) {
+        setEditor(editor);
+      },
+      onSelectionUpdate({editor}) {
+        setEditor(editor);
+      },
+      onTransaction({editor}) {
+        setEditor(editor);
+      },
+      onFocus({editor}) {
+        setEditor(editor);
+      },
+      onBlur({editor}) {
+        setEditor(editor);
+      },
+      onContentError({editor}) {
+        setEditor(editor);
       },
         editorProps: {
             attributes: { 
@@ -32,6 +54,7 @@ const Editor = () => {
 
         },
         extensions: [
+            Underline,
             StarterKit,
             Image,
             ImageResize,
