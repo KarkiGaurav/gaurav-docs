@@ -19,6 +19,7 @@ import { useEditorStore } from '@/store/use-editor-store'
 import TextStyle from '@tiptap/extension-text-style'
 import FontFamily from '@tiptap/extension-font-family'
 import Highlight from '@tiptap/extension-highlight'
+import Link from '@tiptap/extension-link'
 import { Color } from '@tiptap/extension-color'
 
 
@@ -80,7 +81,12 @@ const Editor = () => {
       }),
       TaskList,
       Highlight.configure({ multicolor: true }),
-      Color
+      Color,
+      Link.configure({
+        openOnClick: false,
+        autolink: true,
+        defaultProtocol: 'https',
+      })
 
     ],
     content: `
