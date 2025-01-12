@@ -49,7 +49,7 @@ const FontSizeButton = () => {
     updateFontSize(inputValue);
   }
 
-  const handleKeyDown = (e :React.KeyboardEvent<HTMLIFrameElement>) => {
+  const handleKeyDown = (e :React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
         e.preventDefault();
         updateFontSize(inputValue);
@@ -604,6 +604,7 @@ const Toolbar = () => {
       <ImageButton />
       <AlignButton />
       <ListButton />
+      <FontSizeButton />
       <Separator orientation='vertical' className='h-7 bg-neutral-300' />
 
       {

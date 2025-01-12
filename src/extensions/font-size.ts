@@ -30,12 +30,14 @@ export const fontSizeExtension = Extension.create({
                             if (!attributes.fontSize) {
                                 return {};
                             }
+                            return {
+                                style: `font-size: ${attributes.fontSize}`,
+                            }
                         }
                     }
                 }
             }
         ]
-
     },
     addCommands() {
         return {
