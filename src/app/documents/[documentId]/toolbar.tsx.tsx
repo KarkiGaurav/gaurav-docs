@@ -8,7 +8,7 @@ import {
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 import { useEditorStore } from '@/store/use-editor-store'
-import { AlignCenterIcon, AlignJustifyIcon, AlignLeftIcon, AlignRightIcon, BoldIcon, ChevronDownIcon, HighlighterIcon, ImageIcon, ItalicIcon, Link2Icon, ListIcon, ListOrderedIcon, ListTodoIcon, LucideIcon, MessageSquarePlusIcon, MinusIcon, PlusIcon, PrinterIcon, Redo2Icon, RemoveFormattingIcon, SearchIcon, SpellCheck, UnderlineIcon, Undo2Icon, UploadIcon } from 'lucide-react'
+import { AlignCenterIcon, AlignJustifyIcon, AlignLeftIcon, AlignRightIcon, BoldIcon, ChevronDownIcon, HighlighterIcon, ImageIcon, ItalicIcon, Link2Icon, ListCollapseIcon, ListIcon, ListOrderedIcon, ListTodoIcon, LucideIcon, MessageSquarePlusIcon, MinusIcon, PlusIcon, PrinterIcon, Redo2Icon, RemoveFormattingIcon, SearchIcon, SpellCheck, UnderlineIcon, Undo2Icon, UploadIcon } from 'lucide-react'
 import { type Level } from "@tiptap/extension-heading"
 import { type ColorResult, SketchPicker } from "react-color"
 import { useState } from "react"
@@ -21,6 +21,44 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+
+const LineHeightButton = () => {
+  const { editor } = useEditorStore()
+
+  const alignments = [
+    { label: "Default", value: "normal" },
+    { label: "Single", value: "1" },
+    { label: "1.15", value: "1.15" },
+    { label: "Double", value: "2" }
+
+  ]
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild >
+        <button className='h-7 min-w-7 shrink-0 flex items-center justify-center rounded-sm hover:bg-neutral-200/80 px-1.5 overflow-hidden text-sm'>
+          <ListCollapseIcon className="size-4" />
+        </button>
+
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
+        {
+          alignments.map(({ label, value }) => (
+            <button
+              key={value}
+              onClick={() => editor?.chain().focus().setLineHeight(value).run()}
+              className={cn("flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80", editor?.getAttributes("paragraph").LineHeight === value && 'bg-neutral-200/80')}
+            >
+              <span className="text-sm"> {label} </span>
+            </button>
+          ))
+        }
+
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+
+}
 
 const FontSizeButton = () => {
   const { editor } = useEditorStore()
@@ -603,8 +641,9 @@ const Toolbar = () => {
       <LinkButton />
       <ImageButton />
       <AlignButton />
-      <ListButton />
       <FontSizeButton />
+      <LineHeightButton />
+      <ListButton />
       <Separator orientation='vertical' className='h-7 bg-neutral-300' />
 
       {
