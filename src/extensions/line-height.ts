@@ -16,15 +16,16 @@ export const LineHeightExtension = Extension.create( {
     name: 'lineHeight',
     addOptions() {
         return {
-            type: ['paragraph', 'heading'],
+            types: ['paragraph', 'heading'],
             defaultLineHeight: 'normal'
         }
     },
     addGlobalAttributes() {
         return [
             {
-                type: this.options.types,
-                attributes: {
+                types: this.options.types,
+                attributes : {
+                    lineHeight : {
                     default: this.options.defaultLineHeight,
                     renderHTML: attributes => {
                         if (!attributes.lineHeight) return {}
@@ -36,6 +37,7 @@ export const LineHeightExtension = Extension.create( {
                         return element.style.lineHeight || this.options.defaultLineHeight
                     }
                 }
+            }
             }
         ]
     },

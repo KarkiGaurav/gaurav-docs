@@ -25,13 +25,13 @@ import {
 const LineHeightButton = () => {
   const { editor } = useEditorStore()
 
-  const alignments = [
+  const lineHeights = [
     { label: "Default", value: "normal" },
     { label: "Single", value: "1" },
     { label: "1.15", value: "1.15" },
+    { label: "1.5", value: "1.5" },
     { label: "Double", value: "2" }
-
-  ]
+  ];  
 
   return (
     <DropdownMenu>
@@ -43,7 +43,7 @@ const LineHeightButton = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="p-1 flex flex-col gap-y-1">
         {
-          alignments.map(({ label, value }) => (
+          lineHeights.map(({ label, value }) => (
             <button
               key={value}
               onClick={() => editor?.chain().focus().setLineHeight(value).run()}
@@ -72,10 +72,10 @@ const FontSizeButton = () => {
   const updateFontSize = (newSize: string) => {
     const size = parseInt(newSize);
     if (!isNaN(size) && size > 0) {
-       editor?.chain().focus().setFontSize(`${size}px`).run()
-       setFontSize(newSize);
-       setInputValue(newSize);
-       setIsEditing(false);
+      editor?.chain().focus().setFontSize(`${size}px`).run()
+      setFontSize(newSize);
+      setInputValue(newSize);
+      setIsEditing(false);
     }
   };
 
@@ -87,11 +87,11 @@ const FontSizeButton = () => {
     updateFontSize(inputValue);
   }
 
-  const handleKeyDown = (e :React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-        e.preventDefault();
-        updateFontSize(inputValue);
-        editor?.commands.focus()
+      e.preventDefault();
+      updateFontSize(inputValue);
+      editor?.commands.focus()
     }
   }
 
@@ -105,7 +105,7 @@ const FontSizeButton = () => {
     if (newSize > 0) {
       updateFontSize(newSize.toString());
     }
-   
+
   }
 
 
@@ -113,34 +113,34 @@ const FontSizeButton = () => {
 
     <div className="flex items-cente gap-x-0.5">
       <button onClick={decrement} className="h-7 w-7 shrink-0 items-center justify-center rounded-sm hover:bg-neutral-200/80">
-      <MinusIcon className="size-4" />
+        <MinusIcon className="size-4" />
       </button>
       {
         isEditing ? (
           <input
-          type="text"
-          value={inputValue}
-          onChange={handleInputChange}
-          onBlur={handleInputBlur}
-          onKeyDown={handleKeyDown}
-          className="w-10 h-7 text-center text-sm border-neutral-400 bg-transparent text-neutral-900 rounded-sm border"
-           />
-        ): (
-         <button onClick={() => {
-          setIsEditing(true);
-          setFontSize(currentFontSize);
-         }}
-         className="h-7 w-10 text-sm text-center border border-neutral-400 rounded-sm hover:bg-neutral-200/80"
-         >
-        {currentFontSize}
-         </button>
+            type="text"
+            value={inputValue}
+            onChange={handleInputChange}
+            onBlur={handleInputBlur}
+            onKeyDown={handleKeyDown}
+            className="w-10 h-7 text-center text-sm border-neutral-400 bg-transparent text-neutral-900 rounded-sm border"
+          />
+        ) : (
+          <button onClick={() => {
+            setIsEditing(true);
+            setFontSize(currentFontSize);
+          }}
+            className="h-7 w-10 text-sm text-center border border-neutral-400 rounded-sm hover:bg-neutral-200/80"
+          >
+            {currentFontSize}
+          </button>
         )
       }
       <button onClick={increment} className="h-7 w-7 shrink-0 flex items-center justify-center rounded-sm hover:bg-neutral-200/80">
         <PlusIcon className="size-4" onClick={increment} />
       </button>
     </div>
-    
+
   )
 
 }
