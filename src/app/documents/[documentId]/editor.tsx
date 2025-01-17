@@ -24,7 +24,7 @@ import TextAlign from '@tiptap/extension-text-align'
 import { Color } from '@tiptap/extension-color'
 import { fontSizeExtension } from '@/extensions/font-size'
 import { LineHeightExtension } from '@/extensions/line-height'
-import Ruler from './ruler'
+import { Ruler } from './ruler'
 
 
 const Editor = () => {

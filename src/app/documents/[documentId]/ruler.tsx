@@ -3,7 +3,7 @@ import { FaCaretDown } from "react-icons/fa";
 
 const markers = Array.from({ length: 83 }, (_, i) => i)
 
-const Ruler = () => {
+export const Ruler = () => {
 
   const [leftMargin, setLeftMargin] = useState(56);
   const [rightMargin, setRightMargin] = useState(56);
@@ -32,7 +32,7 @@ const Ruler = () => {
           const maxLeftPosition = 816 - rightMargin - 100;
           const newLeftPosition = Math.min(rawPosition, maxLeftPosition);
           setLeftMargin(newLeftPosition);
-        }else if (isDragggingRight) {
+        } else if (isDragggingRight) {
           const maxRightPosition = 816 - (leftMargin + 100);
           const newRightPosition = Math.max(816 - rawPosition, 0);
           const constrainedRightPostion = Math.min(newRightPosition, maxRightPosition)
@@ -44,8 +44,8 @@ const Ruler = () => {
 
 
   const handleMouseUp = () => {
-      setIsDraggingLeft(false);
-      setIsDraggingRight(false)
+    setIsDraggingLeft(false);
+    setIsDraggingRight(false)
   }
 
   const handleLeftDoubleClick = () => {
@@ -57,15 +57,15 @@ const Ruler = () => {
   }
 
   return (
-    <div 
-    ref={rulerRef}
-    onMouseMove={handleMouseMove}
-    onMouseUp={handleMouseUp}
-    onMouseLeave={handleMouseUp}
-    className='h-6 border-b border-gray-300 flex items-end relative'>
+    <div
+      ref={rulerRef}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      className='h-6 border-b border-gray-300 flex items-end relative'>
       <div id='ruler-container' className="max-w-[816px] mx-auto w-full h-full relative">
         <Marker
-          position={56}
+          position={leftMargin}
           isLeft={true}
           isDraggging={isDragggingLeft}
           onMouseDown={handleLeftMouseDown}
@@ -73,7 +73,7 @@ const Ruler = () => {
         />
 
         <Marker
-          position={56}
+          position={rightMargin}
           isLeft={false}
           isDraggging={isDragggingRight}
           onMouseDown={handleRightMouseDown}
@@ -120,7 +120,7 @@ const Ruler = () => {
   )
 }
 
-export default Ruler
+
 
 
 interface MarkerProps {
@@ -141,12 +141,12 @@ const Marker = ({
   return (
     <div
       className="absolute top-0 w-4 h-full cursor-ew-resize z-[5] group -ml-2"
-      style={{ [isLeft ? "left" : "left"]: `${position}px` }}
+      style={{ [isLeft ? "left" : "right"]: `${position}px` }}
       onMouseDown={onMouseDown}
       onDoubleClick={onDoubleClick}
     >
       <FaCaretDown className='absolute left-1/2 top-0 h-full fill-blue-500 transform translate-x-1/2' />
-      <div className='absolute left-1/2 top-4 transform -translate-x-1/2 duration-150' style={{height: "100vh", width: "1px", transform: "scaleX(0.5)", backgroundColor: "#3b72f6", display: isDraggging? "block" : "none"}}/>
+      <div className='absolute left-1/2 top-4 transform -translate-x-1/2 duration-150' style={{ height: "100vh", width: "1px", transform: "scaleX(0.5)", backgroundColor: "#3b72f6", display: isDraggging ? "block" : "none" }} />
     </div>
   )
 
