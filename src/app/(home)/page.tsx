@@ -1,4 +1,5 @@
 import Navbar from "./navbar";
+import { TemplateGallery } from "./templatesGallery";
 
 export default function Home() {
   return (
@@ -7,7 +8,7 @@ export default function Home() {
         <Navbar />
       </div>
       <div className="mt-16">
-
+         <TemplateGallery />
       </div>
     </div>
    
