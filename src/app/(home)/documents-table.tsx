@@ -1,17 +1,15 @@
-import { PaginationStatus } from 'convex/react'
-import React from 'react'
-import { Doc } from '../../../convex/_generated/dataModel'
+import { Button } from '@/components/ui/button'
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
-    TableRow,
+    TableRow
 } from "@/components/ui/table"
+import { PaginationStatus } from 'convex/react'
 import { Loader } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import { Doc } from '../../../convex/_generated/dataModel'
 import DocumentRow from './document-row'
 
 
@@ -32,7 +30,7 @@ const DocumentsTable = ({ documents, loadMore, status }: DocumentsTableProps) =>
                     </div>
                 ) : (
                     <Table>
-                        <TableCaption className={cn(documents.length === 0 && 'hidden' )}>A list of your recent created documents.</TableCaption>
+                        {/* <TableCaption className={cn(documents.length === 0 && 'hidden')}>A list of your recent created documents.</TableCaption> */}
                         <TableHeader>
                             <TableRow className='hover:bg-transparent border-none'>
                                 <TableHead className="">Name</TableHead>
@@ -43,16 +41,16 @@ const DocumentsTable = ({ documents, loadMore, status }: DocumentsTableProps) =>
                         </TableHeader>
                         {documents.length === 0 ? (
                             <TableBody>
-                            <TableRow className='hover:bg-transparent'>
-                                <TableCell colSpan={4} className="h-24 text-center text-muted-foreground">No Document Found</TableCell>
-                                
-                            </TableRow>
-                        </TableBody>
+                                <TableRow className='hover:bg-transparent'>
+                                    <TableCell colSpan={4} className="h-24 text-center text-muted-foreground">No Document Found</TableCell>
+
+                                </TableRow>
+                            </TableBody>
 
                         ) : (
                             <TableBody>
                                 {documents.map((document, index) => (
-                                    <DocumentRow key={index} document={document}/>
+                                    <DocumentRow key={index} document={document} />
                                 )
                                 )}
                             </TableBody>
@@ -62,6 +60,11 @@ const DocumentsTable = ({ documents, loadMore, status }: DocumentsTableProps) =>
 
                 )
             }
+            <div className="flex items-center justify-center">
+                <Button variant='ghost' size='icon' onClick={() => loadMore(5)} disabled={status !== 'CanLoadMore'}>
+                    {status === "CanLoadMore" ? "Load More" : "End of the result"}
+                </Button>
+            </div>
 
         </div>
     )
