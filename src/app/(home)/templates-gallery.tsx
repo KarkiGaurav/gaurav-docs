@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
 import { useMutation } from 'convex/react';
 import { api } from '../../../convex/_generated/api';
+import { toast } from 'sonner';
 
 const templates = [
     { id: "blank-document", label: "Blank Document", imageUrl: '/blank-document.svg' },
@@ -33,7 +34,10 @@ export const TemplateGallery = () => {
         create({
             title,
             initialContent,
-        }).then((documentId) => {
+        })
+        .catch(() => toast.error("Something went wrong"))
+        .then(() => toast.success("Document created"))
+        .then((documentId) => {
             router.push(`documents/${documentId}`)
         }).finally(() => {
             setIsCreating(false);

@@ -35,6 +35,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { DocumentInput } from './document-input'
 import { useEditorStore } from "@/store/use-editor-store"
+import { OrganizationSwitcher, UserButton } from "@clerk/nextjs"
 
 
 
@@ -42,9 +43,9 @@ export const Navbar = () => {
 
     const { editor } = useEditorStore();
 
-    const insertTable = ({rows, cols} : {rows: number, cols: number}) => {
+    const insertTable = ({ rows, cols }: { rows: number, cols: number }) => {
 
-        return editor?.chain().focus().insertTable({rows, cols, withHeaderRow: false}).run()
+        return editor?.chain().focus().insertTable({ rows, cols, withHeaderRow: false }).run()
     }
 
     const onDownload = (blob: Blob, fileName: string) => {
@@ -189,18 +190,18 @@ export const Navbar = () => {
                                             Table
                                         </MenubarSubTrigger>
                                         <MenubarSubContent>
-                                            <MenubarItem onClick={() => insertTable({rows: 1, cols: 1})}>
+                                            <MenubarItem onClick={() => insertTable({ rows: 1, cols: 1 })}>
                                                 1 x 1
                                             </MenubarItem>
-                                            <MenubarItem onClick={() => insertTable({rows: 2, cols: 2})}>
+                                            <MenubarItem onClick={() => insertTable({ rows: 2, cols: 2 })}>
                                                 2 x 2
                                             </MenubarItem>
 
-                                            <MenubarItem onClick={() => insertTable({rows: 3, cols: 3})}>
+                                            <MenubarItem onClick={() => insertTable({ rows: 3, cols: 3 })}>
                                                 3 x 3
                                             </MenubarItem>
 
-                                            <MenubarItem onClick={() => insertTable({rows: 4, cols: 4})}>
+                                            <MenubarItem onClick={() => insertTable({ rows: 4, cols: 4 })}>
                                                 4 x 4
                                             </MenubarItem>
 
@@ -245,6 +246,16 @@ export const Navbar = () => {
                         </Menubar>
                     </div>
                 </div>
+            </div>
+            <div className="flex gap-3 items-center pl-2">
+                <OrganizationSwitcher
+                    afterCreateOrganizationUrl='/'
+                    afterLeaveOrganizationUrl='/'
+                    afterSelectOrganizationUrl='/'
+                    afterSelectPersonalUrl='/'
+                />
+                <UserButton />
+
             </div>
         </nav >
     )
