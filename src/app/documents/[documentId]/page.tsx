@@ -11,6 +11,8 @@ interface DocumentIdPageProps {
 
 const DocumentIdPage = async ({ params }: DocumentIdPageProps) => {
 
+  // throw new Error("Oops")
+
   const { documentId } = await params
   console.log(documentId)
 
