@@ -31,16 +31,16 @@ export async function POST (req: Request) {
    }
 
    const isOwner = document.ownerId === user.id;
-   const isOrganizationmember = !!(document.organizationId && document.organizationId === sessionClaims.org_id)
+   const isOrganizationMember = !!(document.organizationId && document.organizationId === sessionClaims.org_id)
 
-   if( !isOwner && isOrganizationmember) {
+   if( !isOwner && isOrganizationMember) {
     return new Response('Unauthorized', {status: 404})
    }
 
    const session = liveblocks.prepareSession(user.id, {
      userInfo: {
-        name: user.fullName ?? 'Anonymous',
-        avater: user.imageUrl
+        name: user.fullName ?? user.primaryEmailAddress?.emailAddress ?? 'Anonymous',
+        avatar: user.imageUrl
      }
    });
    session.allow(room, session.FULL_ACCESS);
