@@ -25,6 +25,7 @@ import { Color } from '@tiptap/extension-color'
 import { fontSizeExtension } from '@/extensions/font-size'
 import { LineHeightExtension } from '@/extensions/line-height'
 import { useLiveblocksExtension } from "@liveblocks/react-tiptap";
+import { useStorage } from "@liveblocks/react/suspense"
 import { Ruler } from './ruler'
 import { Threads } from './threads'
 
@@ -33,6 +34,8 @@ const Editor = () => {
 
   const { setEditor } = useEditorStore()
   const liveblocks = useLiveblocksExtension();
+  const leftMargin = useStorage((root) => root.leftMargin);
+  const rightMargin = useStorage((root) => root.rightMargin)
 
   const editor = useEditor({
     autofocus: true,
@@ -63,7 +66,7 @@ const Editor = () => {
     },
     editorProps: {
       attributes: {
-        style: "padding-right: 56px; padding-left: 56px",
+        style:` padding-right: ${rightMargin ?? 56}px; padding-left: ${leftMargin ?? 56}px`,
         class: "w-[816px] focus:outline-none bg-white border print:border-0 border-[#C7C7C7]  flex flex-col min-h-[1054px] pt-10 pb-10 pr-14 cursor-text",
       }
 
