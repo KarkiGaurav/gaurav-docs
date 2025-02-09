@@ -14,13 +14,13 @@ import { api } from '../../../convex/_generated/api';
 import { toast } from 'sonner';
 
 const templates = [
-    { id: "blank-document", label: "Blank Document", imageUrl: '/blank-document.svg' },
-    { id: "software-proposal", label: "Software Proposal", imageUrl: '/software-proposal.svg' },
-    { id: "project-proposal", label: "Project Proposal", imageUrl: '/project-proposal.svg' },
-    { id: "businuss-letter", label: "Business Letter", imageUrl: '/business-letter.svg' },
-    { id: "resume", label: "resume", imageUrl: '/resume.svg' },
-    { id: "cover-letter", label: "Cover Letter", imageUrl: '/cover-letter.svg' },
-    { id: "letter", label: "Letter", imageUrl: '/letter.svg' },
+    { id: "blank-document", label: "Blank Document", imageUrl: '/blank-document.svg', initialContent: `` },
+    { id: "software-proposal", label: "Software Proposal", imageUrl: '/software-proposal.svg', initialContent: `` },
+    { id: "project-proposal", label: "Project Proposal", imageUrl: '/project-proposal.svg', initialContent: `` },
+    { id: "businuss-letter", label: "Business Letter", imageUrl: '/business-letter.svg', initialContent: `` },
+    { id: "resume", label: "resume", imageUrl: '/resume.svg', initialContent: `` },
+    { id: "cover-letter", label: "Cover Letter", imageUrl: '/cover-letter.svg', initialContent: `` },
+    { id: "letter", label: "Letter", imageUrl: '/letter.svg', initialContent: `` },
 ]
 
 export const TemplateGallery = () => {
@@ -35,14 +35,14 @@ export const TemplateGallery = () => {
             title,
             initialContent,
         })
-        .catch(() => toast.error("Something went wrong"))
-        .then((documentId) => {
-            // console.log(documentId)
-            toast.success("Document created")
-            router.push(`documents/${documentId}`)
-        }).finally(() => {
-            setIsCreating(false);
-        })
+            .catch(() => toast.error("Something went wrong"))
+            .then((documentId) => {
+                // console.log(documentId)
+                toast.success("Document created")
+                router.push(`documents/${documentId}`)
+            }).finally(() => {
+                setIsCreating(false);
+            })
     }
 
     return (
