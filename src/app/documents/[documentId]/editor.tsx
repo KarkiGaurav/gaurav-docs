@@ -30,10 +30,16 @@ import { Ruler } from './ruler'
 import { Threads } from './threads'
 
 
-const Editor = () => {
+interface EditorProps {
+  initialContent?: string | undefined;
+}
+
+const Editor = ({ initialContent } : EditorProps) => {
 
   const { setEditor } = useEditorStore()
-  const liveblocks = useLiveblocksExtension();
+  const liveblocks = useLiveblocksExtension({
+    initialContent,
+  });
   const leftMargin = useStorage((root) => root.leftMargin);
   const rightMargin = useStorage((root) => root.rightMargin)
 

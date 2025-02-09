@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Separator } from "@/components/ui/separator";
 import { ClientSideSuspense } from "@liveblocks/react";
 import { useOthers, useSelf } from "@liveblocks/react/suspense";

@@ -15,7 +15,28 @@ import { toast } from 'sonner';
 
 const templates = [
     { id: "blank-document", label: "Blank Document", imageUrl: '/blank-document.svg', initialContent: `` },
-    { id: "software-proposal", label: "Software Proposal", imageUrl: '/software-proposal.svg', initialContent: `` },
+    {
+        id: "software-proposal",
+        label: "Software Proposal",
+        imageUrl: '/software-proposal.svg',
+        initialContent: `<p style="line-height: normal"></p>
+            <p style="line-height: normal"></p>
+            <p style="line-height: normal"></p>
+            <h3 style="line-height: normal"><span
+                    style="font-family: Arial, Helvetica, sans-serif; font-size: 67px; color: #055d75"><strong>Software
+                        development proposal </strong></span></h3>
+            <h3 style="line-height: normal"></h3>
+            <p style="line-height: normal"></p>
+            <p style="line-height: normal"><span style="font-size: 24px"><strong>PREPARED FOR </strong></span></p>
+            <p style="line-height: normal">[Client Name]</p>
+            <p style="line-height: normal">[Client Company Name]</p>
+            <p style="line-height: normal"></p>
+            <p style="line-height: normal"></p>
+            <p style="line-height: normal"></p>
+            <p style="line-height: normal"><span style="font-size: 25px"><strong>PREPARED BY</strong></span></p>
+            <p style="line-height: normal">[Your Name]</p>
+            <p style="line-height: normal">[Your Company Name]</p>` 
+        },
     { id: "project-proposal", label: "Project Proposal", imageUrl: '/project-proposal.svg', initialContent: `` },
     { id: "businuss-letter", label: "Business Letter", imageUrl: '/business-letter.svg', initialContent: `` },
     { id: "resume", label: "resume", imageUrl: '/resume.svg', initialContent: `` },
@@ -56,7 +77,7 @@ export const TemplateGallery = () => {
                                 <div className={cn('aspect-[3/4] flex flex-col gap-y-2.5', isCreating && 'pointer-events-none opacity-50')}>
                                     <button
                                         disabled={isCreating}
-                                        onClick={() => onTemplateClick(template.label, '')}
+                                        onClick={() => onTemplateClick(template.label, template.initialContent)}
                                         style={{
                                             backgroundImage: `url(${template.imageUrl})`,
                                             backgroundSize: 'cover',

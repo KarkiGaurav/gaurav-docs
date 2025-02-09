@@ -46,6 +46,8 @@ export function Room({ children }: { children: ReactNode }) {
 
          return response.json();
       }}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       resolveUsers={({ userIds }) => {
         return userIds.map((userId) =>
           users.find((user) => user.id === userId) ?? undefined
