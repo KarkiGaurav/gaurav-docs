@@ -6,7 +6,7 @@ import { UserButton, OrganizationSwitcher } from '@clerk/nextjs'
 
 const Navbar = () => {
   return (
-    <nav className='flex justify-between items-center h-full w-full'>
+    <nav className='flex justify-between items-center h-full w-full z-50'>
       <div className="flex gap-3 items-center shrink-0 pr-6">
         <Link href={'/'}>
           <Image src="/logo.png" alt="Logo" width={36} height={36} />
